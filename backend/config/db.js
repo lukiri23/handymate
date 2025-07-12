@@ -1,14 +1,18 @@
-const { Sequelize } = require('sequelize');
-require('dotenv').config();
+const mysql = require('mysql2');
 
-const sequelize = new Sequelize(
-  process.env.DB_DATABASE,
-  process.env.DB_USER,
-  process.env.DB_PASS,
-  {
-    host: process.env.DB_HOST,
-    dialect: 'mysql',
+const connection = mysql.createConnection({
+  host: 'localhost',        
+  user: 'root',             
+  password: 'root1234',     
+  database: 'handymate'     
+});
+
+connection.connect((err) => {
+  if (err) {
+    console.error('Napaka pri povezavi z bazo:', err);
+    process.exit(1);
   }
-);
+  console.log('Povezava z lokalno bazo uspešna!');
+});
 
-module.exports = sequelize;
+module.exports = connection;

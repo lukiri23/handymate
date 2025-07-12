@@ -5,7 +5,6 @@ const registerUser = (req, res) => {
   if (!name || !email || !password) {
     return res.status(400).json({ message: 'Prosim, izpolni vsa polja.' });
   }
-
   const sql = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)';
   db.query(sql, [name, email, password], (err, result) => {
     if (err) {
@@ -21,7 +20,6 @@ const loginUser = (req, res) => {
   if (!email || !password) {
     return res.status(400).json({ message: 'Prosim, izpolni email in geslo.' });
   }
-
   const sql = 'SELECT id, name, email, password FROM users WHERE email = ?';
   db.query(sql, [email], (err, results) => {
     if (err) {
